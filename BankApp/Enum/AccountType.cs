@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankApp.Enum
 {
-    internal enum AccountType
+    public enum AccountType
     {
         Checking=1,
         Savings,

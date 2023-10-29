@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankApp.Enum
 {
-    internal enum Operation
+    public enum Operation
     {
         CreateAccount=1,
         DepositMoney, 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankApp.Enum
 {
-    internal enum CurrencyType
+    public enum CurrencyType
     {
         USD=1,
         AZN,

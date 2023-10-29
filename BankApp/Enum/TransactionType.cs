@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankApp.Enum
 {
-    internal enum TransactionType
+    public enum TransactionType
     {
         Deposit,
         Withdraw,
