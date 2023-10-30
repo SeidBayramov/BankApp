@@ -7,9 +7,6 @@ using BankApp.Interfeys;
 
 public class Bank
 {
-    public string Name { get; set; }
-    public string Surname { get; set; }
-    public string Password { get; set; }
     private List<IAccount> accounts;
     private List<List<Transaction>> accountTransactions;
 
