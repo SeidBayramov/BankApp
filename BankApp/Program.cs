@@ -29,16 +29,42 @@ class Program
                 switch ((Operation)choice)
                 {
                     case Operation.CreateAccount:
-                        Console.Write("Select account type (1 - Checking, 2 - Savings, 3 - Business): ");
-                        AccountType accountType = (AccountType)int.Parse(Console.ReadLine());
+                        while (true)
+                        {
+                            Console.Write("Select account type (1 - Checking, 2 - Savings, 3 - Business): ");
+                            if (int.TryParse(Console.ReadLine(), out int accountTypeChoice))
+                            {
+                                if (Enum.IsDefined(typeof(AccountType), accountTypeChoice))
+                                {
+                                    AccountType accountType = (AccountType)accountTypeChoice;
 
-                        Console.Write("Select currency type (1 - USD, 2 - AZN, 3 - EUR): ");
-                        CurrencyType currencyType = (CurrencyType)int.Parse(Console.ReadLine());
+                                    Console.Write("Select currency type (1 - USD, 2 - AZN, 3 - EUR): ");
+                                    CurrencyType currencyType = (CurrencyType)int.Parse(Console.ReadLine());
 
-                        IAccount newAccount = bank.CreateAccount(accountType, currencyType);
-
-                        Console.WriteLine($"New account created. Account ID: {newAccount.AccountId}");
+                                    if (accountType == AccountType.Savings && currencyType != CurrencyType.USD)
+                                    {
+                                        Console.WriteLine("Savings accounts are only available in USD. Please select a different currency.");
+                                    }
+                                    else
+                                    {
+                                        IAccount newAccount = bank.CreateAccount(accountType, currencyType);
+                                        Console.WriteLine($"New account created. Account ID: {newAccount.AccountId}");
+                                        break; // Exit the loop when a valid account is created
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid account type. Please select a valid account type.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input. Please enter a valid number for account type.");
+                            }
+                        }
                         break;
+
+
 
                     case Operation.DepositMoney:
                         Console.Write("Enter the account ID: ");
