@@ -1,6 +1,9 @@
 ﻿using BankApp.Enum;
 using BankApp.Exceptionlar;
 using BankApp.Interfeys;
+using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 public class BankAccount : IAccount
 {
@@ -19,6 +22,7 @@ public class BankAccount : IAccount
         AccountType = accountType;
         CurrencyType = currencyType;
         transactions = new List<Transaction>();
+
     }
 
     public void Deposit(decimal amount)
@@ -34,6 +38,8 @@ public class BankAccount : IAccount
 
     public void Withdraw(decimal amount)
     {
+        Console.WriteLine($"Your current balance: {Balance}");
+
         if (amount <= 0 || amount > Balance)
         {
             throw new InvalidAmountException("Invalid withdrawal amount");
@@ -41,6 +47,8 @@ public class BankAccount : IAccount
 
         Balance -= amount;
         transactions.Add(new Transaction(TransactionType.Withdraw, amount));
+        Console.WriteLine("Money successfully withdrawn.");
+        Console.WriteLine($"Remaining balance: {Balance}");
     }
 
     public List<Transaction> GetTransactions()
